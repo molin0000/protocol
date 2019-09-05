@@ -51,11 +51,23 @@ module.exports = {
             network_id: '*',
             gas: 0xfffffffffff,
             gasPrice: 1
-        }
+        },
+        test3: {
+            host: "127.0.0.1",
+            port: 7545,
+            network_id: "*", // Match any network id
+            // gas: 4712388,
+            // gasPrice: 200000000000,
+            //from: "0xbf12c73ccc1f7f670bf80d0bba93fe5765df9fec",
+            from: "0x06f6B911A07E73E90FD9Dcb56C970cdBaA7E4e52"
+          },
     },
     compilers: {
         solc: {
             version: '0.5.8',
+            evmVersion: "byzantium",
+            // evmVersion: "constantinople",
+
             settings: {
                 optimizer: {
                     enabled: true,

@@ -7,6 +7,10 @@ const ConstPriceOracle = artifacts.require('ConstPriceOracle');
 const DefaultInterestModel = artifacts.require('DefaultInterestModel');
 const StableCoinInterestModel = artifacts.require('StableCoinInterestModel');
 const CommonInterestModel = artifacts.require('CommonInterestModel');
+const GlobalStore = artifacts.require('GlobalStore');
+const Operations = artifacts.require('Operations');
+const ExternalFunctions = artifacts.require('ExternalFunctions');
+
 
 const Auctions = artifacts.require('Auctions');
 const BatchActions = artifacts.require('BatchActions');
@@ -20,6 +24,19 @@ module.exports = async (deployer, network) => {
         await deployer.deploy(BatchActions);
         await deployer.deploy(Auctions);
         await deployer.deploy(OperationsComponent);
+
+        // await deployer.link(BatchActions, ExternalFunctions);
+        // await deployer.link(OperationsComponent, Operations);
+        // await deployer.link(Auctions, ExternalFunctions);
+
+        // await deployer.deploy(GlobalStore);
+        // await deployer.deploy(Operations);
+        // await deployer.deploy(ExternalFunctions);
+
+        // await deployer.link(GlobalStore, Hydro);
+        // await deployer.link(Operations, Hydro);
+        // await deployer.link(ExternalFunctions, Hydro);
+
 
         await deployer.link(BatchActions, Hydro);
         await deployer.link(OperationsComponent, Hydro);
