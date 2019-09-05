@@ -7,9 +7,12 @@ const ConstPriceOracle = artifacts.require('ConstPriceOracle');
 const DefaultInterestModel = artifacts.require('DefaultInterestModel');
 const StableCoinInterestModel = artifacts.require('StableCoinInterestModel');
 const CommonInterestModel = artifacts.require('CommonInterestModel');
-const Requires = artifacts.require('Requires');
+const Signature = artifacts.require('Signature');
 const Discount = artifacts.require('Discount');
 const Exchange = artifacts.require('Exchange');
+const CollateralAccounts = artifacts.require('CollateralAccounts');
+const Relayer = artifacts.require('Relayer');
+
 
 
 const Auctions = artifacts.require('Auctions');
@@ -22,6 +25,13 @@ module.exports = async (deployer, network) => {
 
     const deployHydroMainContract = async hotAddress => {
 
+        await deployer.deploy(CollateralAccounts);
+        await deployer.link(CollateralAccounts, BatchActions);
+        await deployer.link(CollateralAccounts, Auctions);
+        await deployer.link(CollateralAccounts, Exchange);
+
+
+
         await deployer.deploy(BatchActions);
         await deployer.deploy(Auctions);
         await deployer.deploy(OperationsComponent);
@@ -29,7 +39,12 @@ module.exports = async (deployer, network) => {
         await deployer.deploy(Discount);
         await deployer.link(Discount, Exchange);
 
+        await deployer.deploy(Signature);
+        await deployer.link(Signature, Exchange);
+
+
         await deployer.deploy(Exchange);
+
 
         await deployer.link(BatchActions, Hydro);
         await deployer.link(OperationsComponent, Hydro);
@@ -37,6 +52,10 @@ module.exports = async (deployer, network) => {
 
         await deployer.link(Discount, Hydro);
         await deployer.link(Exchange, Hydro);
+        await deployer.link(Signature, Hydro);
+        await deployer.link(CollateralAccounts, Hydro);
+
+
 
         await deployer.deploy(Hydro, hotAddress);
     };

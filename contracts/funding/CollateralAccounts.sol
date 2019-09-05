@@ -38,7 +38,7 @@ library CollateralAccounts {
         address user,
         uint16 marketID
     )
-        internal
+        public
         view
         returns (Types.CollateralAccountDetails memory details)
     {
@@ -93,7 +93,7 @@ library CollateralAccounts {
         address user,
         address asset
     )
-        internal
+        public
         view
         returns (uint256)
     {

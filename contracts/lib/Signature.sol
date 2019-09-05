@@ -45,9 +45,9 @@ library Signature {
     function isValidSignature(
         bytes32 hash,
         address signerAddress,
-        Types.Signature memory signature
+        Types.Signature calldata signature
     )
-        internal
+        external
         pure
         returns (bool)
     {
