@@ -7,9 +7,9 @@ const ConstPriceOracle = artifacts.require('ConstPriceOracle');
 const DefaultInterestModel = artifacts.require('DefaultInterestModel');
 const StableCoinInterestModel = artifacts.require('StableCoinInterestModel');
 const CommonInterestModel = artifacts.require('CommonInterestModel');
-const GlobalStore = artifacts.require('GlobalStore');
-const Operations = artifacts.require('Operations');
-const ExternalFunctions = artifacts.require('ExternalFunctions');
+const Requires = artifacts.require('Requires');
+const Discount = artifacts.require('Discount');
+const Exchange = artifacts.require('Exchange');
 
 
 const Auctions = artifacts.require('Auctions');
@@ -21,26 +21,22 @@ module.exports = async (deployer, network) => {
     let hotAddress;
 
     const deployHydroMainContract = async hotAddress => {
+
         await deployer.deploy(BatchActions);
         await deployer.deploy(Auctions);
         await deployer.deploy(OperationsComponent);
 
-        // await deployer.link(BatchActions, ExternalFunctions);
-        // await deployer.link(OperationsComponent, Operations);
-        // await deployer.link(Auctions, ExternalFunctions);
+        await deployer.deploy(Discount);
+        await deployer.link(Discount, Exchange);
 
-        // await deployer.deploy(GlobalStore);
-        // await deployer.deploy(Operations);
-        // await deployer.deploy(ExternalFunctions);
-
-        // await deployer.link(GlobalStore, Hydro);
-        // await deployer.link(Operations, Hydro);
-        // await deployer.link(ExternalFunctions, Hydro);
-
+        await deployer.deploy(Exchange);
 
         await deployer.link(BatchActions, Hydro);
         await deployer.link(OperationsComponent, Hydro);
         await deployer.link(Auctions, Hydro);
+
+        await deployer.link(Discount, Hydro);
+        await deployer.link(Exchange, Hydro);
 
         await deployer.deploy(Hydro, hotAddress);
     };

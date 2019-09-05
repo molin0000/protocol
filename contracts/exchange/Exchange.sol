@@ -58,9 +58,9 @@ library Exchange {
      */
     function matchOrders(
         Store.State storage state,
-        Types.MatchParams memory params
+        Types.MatchParams calldata params
     )
-        internal
+        external
     {
         require(Relayer.canMatchOrdersFrom(state, params.orderAddressSet.relayer), "INVALID_SENDER");
         require(!params.takerOrderParam.isMakerOnly(), "MAKER_ONLY_ORDER_CANNOT_BE_TAKER");
@@ -112,9 +112,9 @@ library Exchange {
      */
     function cancelOrder(
         Store.State storage state,
-        Types.Order memory order
+        Types.Order calldata order
     )
-        internal
+        external
     {
         require(order.trader == msg.sender, "INVALID_TRADER");
 

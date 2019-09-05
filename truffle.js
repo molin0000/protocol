@@ -61,6 +61,15 @@ module.exports = {
             //from: "0xbf12c73ccc1f7f670bf80d0bba93fe5765df9fec",
             from: "0x06f6B911A07E73E90FD9Dcb56C970cdBaA7E4e52"
           },
+          test4: {
+            host: "192.168.1.19",
+            port: 3333,
+            network_id: "*", // Match any network id
+            gas: 4712388,
+            gasPrice: 180000000000,
+            from: "0xbf12c73ccc1f7f670bf80d0bba93fe5765df9fec",
+            //from: "0x06f6B911A07E73E90FD9Dcb56C970cdBaA7E4e52"
+          },
     },
     compilers: {
         solc: {
