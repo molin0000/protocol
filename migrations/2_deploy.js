@@ -12,6 +12,8 @@ const Discount = artifacts.require('Discount');
 const Exchange = artifacts.require('Exchange');
 const CollateralAccounts = artifacts.require('CollateralAccounts');
 const AssemblyCall = artifacts.require('AssemblyCall');
+const Transfer = artifacts.require('Transfer');
+
 
 
 
@@ -30,6 +32,12 @@ module.exports = async (deployer, network) => {
         await deployer.link(AssemblyCall, BatchActions)
         await deployer.link(AssemblyCall, Auctions)
 
+        await deployer.deploy(Transfer);
+        await deployer.link(Transfer, CollateralAccounts)
+        await deployer.link(Transfer, Discount)
+        await deployer.link(Transfer, BatchActions)
+        await deployer.link(Transfer, Auctions)
+        await deployer.link(Transfer, Exchange)
 
 
 
@@ -64,6 +72,7 @@ module.exports = async (deployer, network) => {
         await deployer.link(Signature, Hydro);
         await deployer.link(CollateralAccounts, Hydro);
         await deployer.link(AssemblyCall, Hydro);
+        await deployer.link(Transfer, Hydro);
 
 
 

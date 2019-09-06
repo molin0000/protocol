@@ -42,7 +42,7 @@ library Transfer {
         address asset,
         uint256 amount
     )
-        internal
+        public
         returns (uint256)
     {
         uint256 depositedEtherAmount = 0;
@@ -70,7 +70,7 @@ library Transfer {
         address asset,
         uint256 amount
     )
-        internal
+        public
     {
         require(state.balances[user][asset] >= amount, "BALANCE_NOT_ENOUGH");
 
@@ -92,7 +92,7 @@ library Transfer {
         Types.BalancePath memory balancePath,
         address asset
     )
-        internal
+        public
         view
         returns (uint256)
     {
@@ -108,7 +108,7 @@ library Transfer {
         Types.BalancePath memory toBalancePath,
         uint256 amount
     )
-        internal
+        public
     {
 
         Requires.requirePathMarketIDAssetMatch(state, fromBalancePath, asset);
@@ -129,7 +129,7 @@ library Transfer {
         Types.BalancePath memory path,
         uint256 amount
     )
-        internal
+        public
     {
         mapping(address => uint256) storage balances = path.getBalances(state);
         balances[asset] = balances[asset].add(amount);
@@ -142,7 +142,7 @@ library Transfer {
         Types.BalancePath memory path,
         uint256 amount
     )
-        internal
+        public
     {
         mapping(address => uint256) storage balances = path.getBalances(state);
         balances[asset] = balances[asset].sub(amount);
