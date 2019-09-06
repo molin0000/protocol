@@ -11,19 +11,28 @@ const Signature = artifacts.require('Signature');
 const Discount = artifacts.require('Discount');
 const Exchange = artifacts.require('Exchange');
 const CollateralAccounts = artifacts.require('CollateralAccounts');
-const Relayer = artifacts.require('Relayer');
+const AssemblyCall = artifacts.require('AssemblyCall');
 
 
 
 const Auctions = artifacts.require('Auctions');
 const BatchActions = artifacts.require('BatchActions');
-
 const OperationsComponent = artifacts.require('OperationsComponent');
 
 module.exports = async (deployer, network) => {
     let hotAddress;
 
     const deployHydroMainContract = async hotAddress => {
+
+        await deployer.deploy(AssemblyCall);
+        await deployer.link(AssemblyCall, CollateralAccounts)
+        await deployer.link(AssemblyCall, Discount)
+        await deployer.link(AssemblyCall, BatchActions)
+        await deployer.link(AssemblyCall, Auctions)
+
+
+
+
 
         await deployer.deploy(CollateralAccounts);
         await deployer.link(CollateralAccounts, BatchActions);
@@ -54,6 +63,7 @@ module.exports = async (deployer, network) => {
         await deployer.link(Exchange, Hydro);
         await deployer.link(Signature, Hydro);
         await deployer.link(CollateralAccounts, Hydro);
+        await deployer.link(AssemblyCall, Hydro);
 
 
 

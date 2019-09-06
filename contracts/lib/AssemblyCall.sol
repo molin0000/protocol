@@ -29,7 +29,7 @@ library AssemblyCall {
         address oracleAddress,
         address asset
     )
-        internal
+        public
         view
         returns (uint256)
     {
@@ -62,7 +62,7 @@ library AssemblyCall {
         address hotToken,
         address owner
     )
-        internal
+        public
         view
         returns (uint256)
     {
@@ -89,7 +89,7 @@ library AssemblyCall {
         address interestModel,
         uint256 borrowRatio
     )
-        internal
+        public
         view
         returns (uint256)
     {
